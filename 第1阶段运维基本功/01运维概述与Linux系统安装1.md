@@ -1,0 +1,1 @@
+[01运维概述与Linux系统安装 (yuque.com)](https://www.yuque.com/chengkanghua/linux3.0/sysinit)
