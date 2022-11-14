@@ -1,0 +1,1 @@
+[02Linux基础命令 (yuque.com)](https://www.yuque.com/chengkanghua/linux3.0/basecmd)
