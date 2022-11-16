@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+    主机资源管理页面
+{% endblock %}
+{% block content %}
+<h1 class="page-header">控制台</h1>
+<h2 class="sub-header">主机资源列表</h2>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加</button>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>主机名称</th>
+            <th>主机类型</th>
+            <th>IP地址</th>
+            <th>主机状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

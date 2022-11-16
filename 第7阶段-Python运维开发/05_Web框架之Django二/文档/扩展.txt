@@ -1,0 +1,12 @@
+CGI服务  common gateway  interface
+
+php-fpm  fastcgi   php  php-fpm  fastcgi process managerment
+
+python  CGI   uwsgi
+
+常见web方面的解决方案  框架
+php laravel  thinkphp
+ruby  rails 
+python  django
+nodejs  express koa  egg.js
+java  j2ee  spring  springboot

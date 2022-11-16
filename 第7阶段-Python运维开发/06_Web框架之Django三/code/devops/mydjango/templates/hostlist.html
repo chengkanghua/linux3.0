@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>主机列表页面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+    <style>
+        .btn-my {
+            padding: 5px 15px;
+            font-size: 16px;
+        }
+
+        .modal-body {
+            padding-top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CMDB系统资源管理</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="/host/list">主机管理 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="/host/userlist">用户管理</a></li>
+                    <li><a href="#">日志管理</a></li>
+                    <li><a href="#">权限管理</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1 class="page-header">控制台</h1>
+                <h2 class="sub-header">主机资源列表</h2>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加</button>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>主机名称</th>
+                                <th>主机类型</th>
+                                <th>IP地址</th>
+                                <th>主机状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框 -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                      <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">添加主机</h4>
+                </div>
+                     <div class="modal-body">
+                    <!-- 此处是在模态框中显示的内容 -->
+                    <!--  写一个表单 -->
+                    <form>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">主机名称</label>
+                            <input type="text" name="hostname" class="form-control" placeholder="主机名称">
+                        </div>
+                         <div class="form-group">
+                            <label for="exampleInputEmail1">IP地址</label>
+                            <input type="text" name="ip" class="form-control" placeholder="IP地址">
+                        </div>
+                         <div class="form-group">
+                            <label for="exampleInputEmail1">主机类型</label>
+                            <select class="form-control" name="type">
+                                <option value="1">web服务器</option>
+                                <option value="2">mysql数据库服务器</option>
+                                <option value="3">负载均衡服务器</option>
+                                <option value="4">cache服务器</option>
+                                <option value="5">中间件服务器</option>
+                            </select>
+                        </div>
+                         <div class="form-group">
+                            <label for="exampleInputEmail1">主机状态</label>
+                            <select class="form-control" name="status">
+                                <option value="1">up</option>
+                                <option value="0">down</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                     <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+                    <button type="button" class="btn btn-primary" id="savebtn">添加</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- 引入js -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/layer/layer.js"></script>
+    <script>
+        // 拼接模板函数
+        function mytpl(res){
+            var tpl = '';
+                for (var index = 0; index < res.length; index++) {
+                    // console.log(res[index].id)
+                    tpl += '<tr>';
+                    tpl += '<td>' + res[index].id + '</td>';
+                    tpl += '<td>'+res[index].hostname+'</td>';
+                    tpl += '<td>'+res[index].type+'</td>';
+                    tpl += '<td>'+res[index].ip+'</td>';
+                    tpl += '<td>'+res[index].status+'</td>';
+                    tpl += '<td><button class="btn btn-primary btn-sm">更新</button><button class="btn btn-danger btn-sm">删除</button></td>'
+                    // console.log(res[index]);
+                    tpl += '</tr>';
+                }
+            return tpl;
+        }
+        // 动态加载主机列表信息
+        $.ajax({
+            // 发送请求的方法
+            type: "get",
+            // 发送请求的地址
+            url: "http://localhost:3000/hosts",
+            // 发送的数据
+            data: "",
+            // 数据类型
+            dataType: "json",
+            // 回调函数  请求成功  返回的res数据  请求成功状态码  http 200
+            success: function (res) {
+                //   console.log(res);
+                // 遍历拼接模板
+                newtpl = mytpl(res);
+                // 追加拼接好的字符串
+                $('tbody').append(newtpl);
+                // console.log(tpl);
+            }
+        });
+        // 1、找到所有的删除标签  并且遍历绑定事件
+        $('.btn-danger').each(function (index, item) {
+            // console.log(item);
+            // 2、给每一个删除按钮绑定事件
+            $(item).click(function () {
+                // 点击之后confirm确认框
+                layer.confirm('确认删除吗?', {
+                    btn: ['确认', '取消'] //按钮
+                }, function () {
+                    // 点击第一个按钮,执行的操作
+                    console.log($(item).parent().parent().remove());
+                    layer.msg('删除成功', {
+                        icon: 1
+                    });
+                }, function () {
+                    // 点击第二个按钮执行的操作
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

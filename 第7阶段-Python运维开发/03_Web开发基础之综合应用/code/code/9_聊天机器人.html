@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery-3.4.1.js"></script>
+    <script>
+        var data = {key:'d7c82ebd8b304abeacc73b366e42b9ed',info:'你好'};
+        $.post("http://www.tuling123.com/openapi/api", data,
+            function (data, textStatus, jqXHR) {
+              console.log(data.text)  
+            },
+        );
+    </script>
+</body>
+</html>

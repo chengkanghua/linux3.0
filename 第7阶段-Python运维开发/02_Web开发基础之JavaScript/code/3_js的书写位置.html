@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- js 行内写法 -->
+    <button onclick="alert('点到我了')">别点我</button>
+    <button id="btn">就点你</button>
+    <script>
+        // 内部js写法
+        document.getElementById('btn').onclick=function(){
+            alert('就点你');
+        }
+    </script>
+</body>
+</html>

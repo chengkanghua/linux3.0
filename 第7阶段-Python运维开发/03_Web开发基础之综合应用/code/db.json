@@ -1,0 +1,46 @@
+{
+  "hosts": [
+    {
+      "id": 2,
+      "hostname": "server02",
+      "ip": "192.168.17.101",
+      "type": "db",
+      "status": "up"
+    },
+    {
+      "id": 3,
+      "hostname": "server03",
+      "ip": "192.168.17.102",
+      "type": "web",
+      "status": "up"
+    },
+    {
+      "id": 4,
+      "hostname": "server04",
+      "ip": "192.168.17.103",
+      "type": "lb",
+      "status": "up"
+    },
+    {
+      "id": 5,
+      "hostname": "server05",
+      "ip": "192.168.17.104",
+      "type": "haproxy",
+      "status": "up"
+    },
+	{
+      "id": 6,
+      "hostname": "server06",
+      "ip": "192.168.17.106",
+      "type": "mysql slave",
+      "status": "up"
+    },
+	{
+      "id": 7,
+      "hostname": "server07",
+      "ip": "192.168.17.106",
+      "type": "mycat",
+      "status": "up"
+    }
+  ]
+}

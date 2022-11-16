@@ -1,0 +1,85 @@
+html{ padding: 0; margin: 0;}
+body,h1,.h2,h3,ul,h2,p,fieldset{padding: 0; margin: 0; font-family:"微软雅黑"; font-style: normal;}
+
+li{ list-style-type: none;}
+a{ text-decoration: none;}
+img{vertical-align: middle;}
+.w-main{ background: url(../images/w-main.jpg) center; background-size: cover; height: 715px; }
+.w-main p{ color: #fff; text-align: center; line-height: 30px; font-size: 18px;}
+.w-main-p{ padding-top: 380px;}
+.w-nav{ width: 730px; overflow: hidden; height: 60px; margin: 0 auto; margin-top: 50px;}
+.w-nav a{ float: left; margin-right: 15px; display: block; line-height: 60px; text-align: center; font-size: 28px;
+height: 60px; width: 166px; color: #fff; }
+.w-buyhouse{ background: #39ac6a; }
+.w-sellhouse{background: #ed0d0e;}
+.w-renthouse{ background: #79795f;}
+.w-renting{ background: #fe9a41;}
+.w-main1{background: #eaeaea; height: 263px;}
+.w-menu{ width: 1004px;  margin: 0 auto; overflow: hidden;  }
+.w-menu li{ float: left;}
+.w-menu li a:hover{ background: #e3e3e3;}
+.w-menu li a{ width: 251px; height: 263px; display: block;}
+.w-menu span{ background: url(../images/icon.png) no-repeat; width: 251px; height: 243px; display: inline-block; margin-top: 20px;}
+.buy span{background-position: 50px 0;}
+.sell span{ background-position: -250px 0;}
+.rent span{background-position: -540px 0;}
+.renting span{background-position: -815px 0;}
+.w-main2{ background: #f5f5f5; height: 430px;}
+.w-main4{ background: #f5f5f5; height: 430px;}
+.wrap1004{ width: 1100px; overflow: hidden; margin: 0 auto;}
+.w-wide-pic{ float: left; width:  485px; height: 430px;}
+.w-wide-text{ float: left; width:600px ; margin-left: 15px;}
+.w-wide-text .title{ font-size: 64px; margin-top: 110px; display: block;}
+.advantage{ font-size: 23px; line-height: 40px;} 
+.w-main2 p{ color: #1b7d27; font-size: 18px; margin-top: 30px; line-height: 30px;}
+.w-main3 p{ color: #ed0d0e; font-size: 18px; margin-top: 30px; line-height: 30px;}
+.w-main4 p{ color: #79795f; font-size: 18px; margin-top: 30px; line-height: 30px;}
+.w-main5 p{ color: #c56713; font-size: 18px; margin-top: 30px; line-height: 30px;}
+.popup-buy,.popup-sell,.popup-rent,.popup-renting{background: #f5f5f5; width: 465px; height: 590px;  margin: 0 auto; position: relative;}
+.popup-rent ,.popup-renting{ height: 650px;}
+.popup-title{ background: #fff; height: 90px; text-align: center; padding-top: 10px;}
+.popup-title span{ color: #1d1d1d; font-size: 40px;}
+.popup-title p{ color: #111; font-size: 15px;}
+.popup-menu{ height: 500px; }
+.popup-menu span{ text-align: right; width: 98px; float: left; line-height: 38px; margin-top: 15px; color: #4b4d4d; font-size: 17px;}
+.w-name{width: 312px; height: 38px; border: 1px solid #d0cece; float: left; margin: 15px 0 0 15px;}
+.popup-menu span i{ color: #b8092d; margin:5px; font-style: normal;}
+.popup-menu li{ overflow: hidden;}
+.popup-select{ margin-top: 15px; width: 75px; height: 38px; border:1px solid #D0CECE; color: #1d1d1d; font-family: "微软雅黑";}
+.popup-zx{ margin: 15px 0 0 15px; width: 125px; height: 38px; border:1px solid #D0CECE; color: #1d1d1d; font-family: "微软雅黑";}
+.w-subbtn{ line-height:38px; margin: 15px 0 0 115px; width: 312px; height: 38px; text-align: center; color: #fff; background: #b8092d; display: block;}
+.popup-close{ position: absolute; background: url(../images/close.png); width: 50px; height: 55px; right: -25px; top: -25px; cursor: pointer;}
+.popup-menu .l-all{padding: 25px 0 0 15px; display: inline-block; color: #4b4d4d; }
+.w-else{ border: 0; width: 314px; padding: 15px 0 0 15px;}
+
+
+.w-checkbox input[type=checkbox] {
+	visibility: hidden;
+	position: absolute;
+}
+.w-checkbox{
+	width: 81px;
+	float: left;
+}
+.w-checkbox label {
+	width: 22px;
+	height: 22px;	
+	background:url(../images/label.png) no-repeat;
+	display: inline-block;
+	float: left;
+}
+
+.w-checkbox input[type=checkbox]:checked + label {
+	background:url(../images/ture.png) no-repeat;
+}
+.w-checkbox i{ font-size: 13px; font-style: normal; float: left; color: #4b4d4d;}
+#w-scrol{ height: 220px; background: rgba(0,0,0,.6);   text-align: center; width: 100%; position: fixed; bottom: 0; margin-top: 210px; }
+.f-title{ color: #fff; font-size: 24px; padding-top: 50px;}
+#w-scrol a{ width: 129px; height: 47px; font-size: 20px; text-align: center; line-height: 47px;}
+#w-scrol p{ line-height: 30px; color: #fff;}
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var arr = [];
+        // // console.log(typeof(arr));
+        // var arr1 = [1, 1, 1, 1, 1, 1, 4, 4, 5];
+        // console.log(arr1);
+        // console.log('arr1里的元素个数是:' + arr1.length);
+        // arr1.length = 0;
+        // console.log(arr1);
+        // var arr2 = ['linux', 2000];
+        // console.log(arr2[0]);
+        // console.log(arr2[3]);
+        // 遍历数组
+        var arrinfo = ['centos','ubuntu','suse','debian','deepin','rethat'];
+        // arrinfo[0]
+        // arrinfo[1]
+        for(var i = 0 ;i<arrinfo.length;i++){
+            console.log(arrinfo[i])
+        }
+        arrinfo[0] = 'CentOS';
+        console.log(arrinfo[0]);
+        arrinfo[6] = 'devops';
+        console.log(arrinfo);
+        console.log(arrinfo.pop())
+        console.log(arrinfo);
+        arrinfo.push('devops');
+        console.log(arrinfo);
+        arrinfo.splice(0,3,'windows');
+        console.log(arrinfo);
+    </script>
+</body>
+
+</html>

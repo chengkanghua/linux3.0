@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block mbx %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>用户展示</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a hreaf="{% url 'index' %}">首页</a>
+                </li>
+                <li>
+                    <a href="">用户管理</a>
+                </li>
+                <li>
+                    <a href="">用户展示</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>用户展示 </h5>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">用户名</th>
+                        <th class="text-center">邮箱</th>
+                        <th class="text-center">微信</th>
+                        <th class="text-center">中文名</th>
+                        <th class="text-center">电话</th>
+                        <th class="text-center">激活状态</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for one in object_list %}
+                        <tr>
+                            <td class="text-center">{{ one.username }}</td>
+                            <td class="text-center">{{ one.email }}</td>
+                            <td class="text-center">{{ one.profile.wechat }}</td>
+                            <td class="text-center">{{ one.profile.name_cn }}</td>
+                            <td class="text-center">{{ one.profile.phone }}</td>
+                            {% if one.is_active == 1 %}
+                                <td class="text-center"><i class="fa fa-circle text-navy"></i></td>
+                            {% else %}
+                                <td class="text-center"><i class="fa fa-circle text-danger"></i></td>
+                            {% endif %}
+                            <td class="text-center">
+                                <button type="button" class="btn btn-primary btn-sm">更新</button>
+                                <button type="button" class="btn btn-danger btn-sm">删除</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <center>
+                    <div class="btn-group">
+                    {% if page_obj.has_previous %}
+                        <a type="button" class="btn btn-white" href="{% url 'user_list' %}?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-left"></i></a>
+                    {% endif %}
+                        {% for page in page_range %}
+                            {% if page_obj.number == page %}
+                                <a class="btn btn-white active"
+                                   href="{% url 'user_list' %}?page={{ page }}">{{ page }}</a>
+                            {% else %}
+                                <a class="btn btn-white" href="{% url 'user_list' %}?page={{ page }}">{{ page }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {#                        <button class="btn btn-white  active">2</button>#}
+                        {#                        <button class="btn btn-white">3</button>#}
+                        {#                        <button class="btn btn-white">4</button>#}
+                    {% if page_obj.has_next %}
+                        <a type="button" class="btn btn-white" href="{% url 'user_list' %}?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-right"></i></a>
+                    {% endif %}
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+{% endblock %}

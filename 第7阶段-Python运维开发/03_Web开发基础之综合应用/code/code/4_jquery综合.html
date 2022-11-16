@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active{
+            /* color:aqua; */
+            background-color: mediumspringgreen;
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <button>小米</button>
+    <button>华为</button>
+    <button>苹果</button>
+    <div>
+        <p class="brand0">小米3</p>
+        <p class="brand0">小米6</p>
+        <p class="brand1">华为p20</p>
+        <P class="brand2">苹果x</P>
+    </div>
+    <script src="./jquery-3.4.1.js"></script>
+    <script>
+        $('button').each(function (index, item) {
+            $(item).click(function () {
+                //  先隐藏
+                $('p').hide('slow');
+                //  后根据点击的分类  筛选出对应的分类进行显示
+                $('.brand' + index).show();
+                // 隐藏非点击的button
+                // $('button').hide();
+                $('button').removeClass('active');
+                $(item).show().addClass('active');
+            })
+        });
+    </script>
+</body>
+
+</html>

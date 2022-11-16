@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+
+{% block load_css %}
+    <link href="/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <link href="/static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block mbx %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>主机展示</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'index' %}">首页</a>
+                </li>
+                <li>
+                    <a href="">资源管理</a>
+                </li>
+                <li>
+                    <a href="">主机展示</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>主机展示 </h5>
+            </div>
+            <div class="ibox-content">
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                        data-target="#myModal">
+                    添加服务器
+                </button>
+                <div class="modal inmodal fade" id="myModal" tabindex="-1"
+                     role="dialog"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span
+                                        aria-hidden="true">&times;</span><span
+                                        class="sr-only">Close</span>
+                                </button>
+                                <h4 class="modal-title">添加服务器</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="create_host_form">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label">主机IP</label>
+                                        <input type="text" class="form-control" placeholder="主机IP"
+                                               name="ip_inner">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label">主机端口</label>
+                                        <input type="text" class="form-control" placeholder="主机端口(基于SSH)"
+                                               name="port">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label">系统用户</label>
+                                        <select class="select2_demo_1 form-control" name="serveruser_id">
+                                            {% for system_user in systemuser_list %}
+                                                <option value="{{ system_user.id }}">{{ system_user.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label">操作系统</label>
+                                        <select class="select2_demo_1 form-control" name="os_status">
+                                            {% for os_tuple in os_list %}
+                                                <option value="{{ os_tuple.0 }}">{{ os_tuple.1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-12 control-label">机器类型</label>
+                                        <select class="select2_demo_1 form-control" name="system_status">
+                                            {% for system_tuple in system_list %}
+                                                <option value="{{ system_tuple.0 }}">{{ system_tuple.1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" data-style="expand-right"
+                                        id="submit_host">提交
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">主机名</th>
+                        <th class="text-center">CPU信息</th>
+                        <th class="text-center">CPU个数</th>
+                        <th class="text-center">内存信息</th>
+                        <th class="text-center">系统平台</th>
+                        <th class="text-center">系统平台位数</th>
+                        <th class="text-center">探测状态</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td class="text-center">{{ object.hostname }}</td>
+                            <td class="text-center">{{ object.cpu_info }}</td>
+                            <td class="text-center">{{ object.cpu_count }}</td>
+                            <td class="text-center">{{ object.mem_info }}</td>
+                            <td class="text-center">{{ object.os_system }}</td>
+                            <td class="text-center">{{ object.os_system_num }}</td>
+                            <td class="text-center">{{ object.scan_status }}</td>
+                            <td class="text-center">
+                                <a class="btn btn-xs btn-info" onclick="server_flush({{ object.id }})">刷新探测</a>
+                                <a class="btn btn-danger btn-sm" onclick="">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <center>
+                    <div class="btn-group">
+                        {% if page_obj.has_previous %}
+                            <a href="{% url 'server_list' %}?page={{ page_obj.previous_page_number }}"
+                               class="btn btn-white">上一页</a>
+                        {% endif %}
+                        {% for page in page_range %}
+                            {% if page_obj.number == page %}
+                                <a class="btn btn-white active">{{ page }}</a>
+                            {% else %}
+                                <a class="btn btn-white" href="{% url 'server_list' %}?page={{ page }}">{{ page }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a href="{% url 'server_list' %}?page={{ page_obj.next_page_number }}"
+                               class="btn btn-white">下一页</a>
+                        {% endif %}
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block load_js %}
+    <script src="/static/js/plugins/ladda/spin.min.js"></script>
+    <script src="/static/js/plugins/ladda/ladda.min.js"></script>
+    <script src="/static/js/plugins/ladda/ladda.jquery.min.js"></script>
+    <script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="/static/js/plugins/toastr/toastr.min.js"></script>
+    <script>
+        function idc_delete(id) {
+            var data = {};
+            data['id'] = id;
+            data['csrfmiddlewaretoken'] = "{{ csrf_token }}";
+            $.ajax({
+                url: '{% url 'idc_delete' %}',
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    if (res.status == 0) {
+                        swal({
+                            title: res.msg,
+                            type: 'success',
+                            confirmButtonText: "OK"
+                        }, function () {
+                            window.location.reload()
+                        });
+                    } else {
+                        swal({
+                            title: res.msg,
+                            type: 'error',
+                            confirmButtonText: "知道了"
+                        });
+                    }
+                }
+            })
+        };
+        $('#submit_host').click(function () {
+            var btn = $(this).ladda();
+            btn.ladda('start');
+            var data = $('#create_host_form').serialize();
+            $.ajax({
+                url: '{% url 'server_create' %}',
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    setTimeout(function () {
+                        btn.ladda('stop');
+                    }, 200);
+                    if (res.status == 0) {
+                        swal({
+                            title: res.msg,
+                            type: 'success',
+                            confirmButtonText: "OK"
+                        }, function () {
+                            window.location.href = '{% url 'server_list' %}';
+                        });
+                    } else {
+                        swal({
+                            title: res.msg,
+                            type: 'error',
+                            confirmButtonText: "知道了"
+                        });
+                    }
+                }
+            })
+
+        });
+
+        function server_flush(server_id) {
+            var data = {};
+            data['server_id'] = server_id;
+            data['csrfmiddlewaretoken'] = "{{ csrf_token }}";
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-top-right",
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "1000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "onHidden": function () {
+                    window.location.reload();
+                }
+            };
+            $.ajax({
+                url: '{% url 'server_flush' %}',
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    if (res.status == 0) {
+                        toastr.success('刷新探测', res.msg);
+                    } else {
+                        toastr.error('刷新探测', res.msg);
+                    }
+                }
+            })
+        }
+    </script>
+{% endblock %}

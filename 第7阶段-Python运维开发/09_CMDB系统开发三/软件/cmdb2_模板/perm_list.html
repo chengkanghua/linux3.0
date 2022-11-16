@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>权限展示 </h5>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">权限名</th>
+                        <th class="text-center">权限描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td class="text-center">{{ object.codename }}</td>
+                            <td class="text-center">{{ object.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <center>
+                    <div class="btn-group">
+                        {% if page_obj.has_previous %}
+                            <a href="{% url 'perm_list' %}?page={{ page_obj.previous_page_number }}"
+                               class="btn btn-white">上一页</a>
+                        {% endif %}
+                        {% for page in page_range %}
+                            {% if page_obj.number == page %}
+                                <a class="btn btn-white active">{{ page }}</a>
+                            {% else %}
+                                <a class="btn btn-white" href="{% url 'perm_list' %}?page={{ page }}">{{ page }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a href="{% url 'perm_list' %}?page={{ page_obj.next_page_number }}" class="btn btn-white">下一页</a>
+                        {% endif %}
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+{% endblock %}

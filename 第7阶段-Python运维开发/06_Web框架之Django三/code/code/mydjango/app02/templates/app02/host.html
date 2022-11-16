@@ -1,0 +1,21 @@
+{% extends 'app02/base.html' %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">主机列表</h1>
+        <a class="btn btn-info btn-lg" data-toggle="modal" data-target="#mybox">添加主机</a>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>ID</th>
+                <th>hostname</th>
+                <th>IP</th>
+                <th>type</th>
+                <th>status</th>
+                <th>操作</th>
+            </tr>
+            <!-- 动态加载主机列表 -->
+        </table>
+    </div>
+{% endblock %}
+{% block title %}
+    <title>CMDB资源管理平台系统--主机列表</title>
+{% endblock %}

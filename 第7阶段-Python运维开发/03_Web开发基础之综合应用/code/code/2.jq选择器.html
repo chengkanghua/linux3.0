@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="myh1">1</h1>
+    <h1 class="myh1">2</h1>
+    <div id='box'>this is box</div>
+    <script src="./jquery-3.4.1.js"></script>
+    <script>
+        // js选择器
+        // console.log(document.querySelector('title').innerHTML);
+        // // jq选择器
+        // console.log($('title').html());
+        // // js类选择器  选中多个并操作输出
+        // myh1s = document.querySelectorAll('.myh1');
+        // for (var index = 0; index < myh1s.length; index++) {
+        //     myh1s[index].style.color='red';
+        // }
+        // // jq类选择器
+        // $('.myh1').each(function(index,item){
+        //    $(item).css('color','green');
+        // });
+        // console.log($('.myh1').eq(1).html());
+        // js事件绑定
+        // document.querySelector('h1').onclick=function(){
+        //     alert(this.innerHTML);
+        // }
+        // jq事件绑定
+        $('h1').eq(0).click(function () {
+            alert($(this));
+            // alert(this.innerHTML);
+            // alert($(this).html());
+        })
+        // jq 鼠标事件
+        // $('#box').mouseover(function(){
+        //    console.log(new Date().getTime());
+        // })
+        // js 鼠标事件
+        // document.querySelector('#box').onmouseover=function(){
+        //     console.log(new Date().getTime());
+        // }
+    </script>
+</body>
+</html>

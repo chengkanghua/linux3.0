@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    {% block title %}
+    {% endblock %}
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CMDB资源管理平台系统</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="/app02/host">主机列表 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="/app02/user">用户列表</a></li>
+                </ul>
+            </div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="mybox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h1 class="modal-title" id="myModalLabel">主机添加</h1>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="">
+                        <div class="form-group">
+                            主机名称<input type="text" name="username" class="form-control" size="100" id="hostname" />
+                        </div>
+                        <div class="form-group">
+                            IP: <input type="text" name="ip" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            主机类型:<select name="type" id="" class="form-control">
+                                <option value="0">===请选择===</option>
+                                <option value="1">db</option>
+                                <option value="2" selected>web</option>
+                                <option value="3">redis</option>
+                                <option value="4">mongodb</option>
+                                <option value="5">tomcat</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            主机状态:<select name="status" id="" class="form-control">
+                                <option value="0">===请选择===</option>
+                                <option value="1">在线</option>
+                                <option value="2" selected>下载</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="savebtn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/layer.js"></script>
+    <script>
+        // 1、获取当前url
+        var currentUrl = window.location.pathname
+        // 2、遍历查看li标签下面的a 对应的href 进行和url匹配
+        $('.nav > li > a').each(function(index,item){
+               $(this).parent().removeClass('active')
+            {#alert(this)#}
+            // 3、获取href
+            if($(this).attr('href') == currentUrl){
+                // 4、找到和url匹配的href了
+                // 把href对应的li标签  加class active
+                $(this).parent().addClass('active')
+            }
+
+        })
+    </script>
+</body>
+
+</html>

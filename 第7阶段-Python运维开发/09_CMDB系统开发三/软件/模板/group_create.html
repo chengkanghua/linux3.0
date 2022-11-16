@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block load_css %}
+    <link href="/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/static/css/plugins/select2/select2.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block mbx %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>创建用户组</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'index' %}">首页</a>
+                </li>
+                <li>
+                    <a href="">用户组管理</a>
+                </li>
+                <li>
+                    <a href="">创建用户组</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="ibox-content">
+        <form id="submit_form" class="form-horizontal">
+            {% csrf_token %}
+            <div class="form-group"><label class="col-sm-2 control-label">用户组名</label>
+                <div class="col-sm-6"><input type="text" class="form-control" name="name"></div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group"><label class="col-sm-2 control-label">选择用户</label>
+                <div class="col-sm-6">
+                    <select class="select2_demo_2 form-control" multiple="multiple" name="group_user">
+                        {% for user in user_list %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <button class="btn btn-white" type="submit">取消</button>
+                    <button class="btn btn-primary" type="submit">保存更改</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block load_js %}
+    <!-- Select2 -->
+    <script src="/static/js/plugins/validate/jquery.validate.js"></script>
+    <script src="/static/js/plugins/validate/messages_zh.js"></script>
+    <script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="/static/js/plugins/select2/select2.full.min.js"></script>
+    <script>
+        $(".select2_demo_2").select2();
+
+        $(document).ready(function () {
+            $("#submit_form").validate({
+                rules: {
+                    name: {
+                        required: true
+                    }
+                }, submitHandler: function () {
+                    var str = $('#submit_form').serialize();
+                    $.post('{% url 'group_create' %}', str, function (res) {
+                        if (res.status == 0) {
+                            swal({
+                                title: res.msg,
+                                type: 'success',
+                                confirmButtonText: "OK"
+                            }, function () {
+                                window.location.href = '{% url 'group_list' %}';
+                            });
+                        } else {
+                            swal({
+                                title: res.msg,
+                                type: 'error',
+                                confirmButtonText: "知道了"
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}

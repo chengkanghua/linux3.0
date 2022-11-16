@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block mbx %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>用户组展示</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'index' %}">首页</a>
+                </li>
+                <li>
+                    <a href="">用户组管理</a>
+                </li>
+                <li>
+                    <a href="">用户组展示</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>用户组展示 </h5>
+            </div>
+            <div class="ibox-content">
+                <a class="btn btn-w-m btn-primary" href="{% url 'group_add' %}">创建用户组</a>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">用户组名</th>
+                        <th class="text-center">组内成员</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td class="text-center">{{ object.name }}</td>
+                            <td class="text-center">
+                                <a data-toggle="popover"
+                                   data-placement="auto bottom" data-content="
+                                        {% for user in object.user_set.all %}{{ user.profile.name_cn }},{% endfor %}">
+                                    {{ object.user_set.all.count }}
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{% url 'group_update' %}?gid={{ object.id }}"
+                                   class="btn btn-primary btn-sm">更新</a>
+                                <a class="btn btn-danger btn-sm" onclick="group_delete({{ object.id }})">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <center>
+                    <div class="btn-group">
+                        {% if page_obj.has_previous %}
+                            <a href="{% url 'group_list' %}?page={{ page_obj.previous_page_number }}"
+                               class="btn btn-white">上一页</a>
+                        {% endif %}
+                        {% for page in page_range %}
+                            {% if page_obj.number == page %}
+                                <a class="btn btn-white active">{{ page }}</a>
+                            {% else %}
+                                <a class="btn btn-white" href="{% url 'group_list' %}?page={{ page }}">{{ page }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a href="{% url 'group_list' %}?page={{ page_obj.next_page_number }}" class="btn btn-white">下一页</a>
+                        {% endif %}
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block load_js %}
+    <script>
+        function group_delete(group_id) {
+            $.get('{% url 'group_delete' %}', {gid: group_id}, function (res) {
+                if (res.status == 0) {
+                    swal({
+                        title: res.msg,
+                        type: 'success',
+                        confirmButtonText: "确定"
+                    }, function () {
+                        window.location.reload()
+                    });
+                } else {
+                    swal({
+                        title: res.msg,
+                        type: 'error',
+                        confirmButtonText: "确定"
+                    });
+                }
+            });
+        };
+    </script>
+{% endblock %}

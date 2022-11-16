@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="page-header">控制台</h1>
+    <h2 class="sub-header">用户列表</h2>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加</button>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>名称</th>
+                <th>职位</th>
+                <th>部门</th>
+                <th>状态</th>
+                <th>操作时间</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block title %}
+    用户信息管理页面
+{% endblock %}

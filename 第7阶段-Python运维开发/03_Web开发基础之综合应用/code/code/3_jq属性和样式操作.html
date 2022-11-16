@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<form action="/" method="post">
+    <button id="mybtn">点击显示图片</button>
+    <input type="text" name="" id="" value="你好">
+    <img src="./1.jpg" alt="">
+</form>
+<body>
+    <script src="./jquery-3.4.1.js"></script>
+    <script>
+        console.log($('input').val('hello').attr('maxlength','1'));
+        console.log($('title').html('jq属性和样式操作'));
+        console.log($('img').attr('title','传智播客和黑马程序员'))
+        $('img').click(function() {
+            console.log(this);
+            // this.style.display='none';
+            $(this).hide();
+        })
+        $('form').click(function(){
+            return false;
+        })
+        // 按钮点击之后显示图片
+        $('button').click(function(){
+            $('img').show();
+        })
+    </script>
+</body>
+</html>

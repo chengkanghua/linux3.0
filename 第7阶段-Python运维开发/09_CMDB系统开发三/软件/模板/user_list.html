@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block load_css %}
+    <link href="/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+{% endblock %}
+
+{% block mbx %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>用户展示</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'index' %}">首页</a>
+                </li>
+                <li>
+                    <a href="">用户管理</a>
+                </li>
+                <li>
+                    <a href="">用户展示</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>用户展示 </h5>
+            </div>
+            <div class="ibox-content">
+                {% if perms.users.add_user %}
+                    <a class="btn btn-w-m btn-primary" href="{% url 'user_create' %}">创建用户</a>
+                {% endif %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">用户名</th>
+                        <th class="text-center">邮箱</th>
+                        <th class="text-center">微信</th>
+                        <th class="text-center">中文名</th>
+                        <th class="text-center">电话</th>
+                        <th class="text-center">激活状态</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td class="text-center">{{ object.username }}</td>
+                            <td class="text-center">{{ object.email }}</td>
+                            <td class="text-center">{{ object.profile.weixin }}</td>
+                            <td class="text-center">{{ object.profile.name_cn }}</td>
+                            <td class="text-center">{{ object.profile.phone }}</td>
+                            {% if object.is_active %}
+                                <td class="text-center"><i class="fa fa-circle text-navy"></i></td>
+                            {% else %}
+                                <td class="text-center"><i class="fa fa-circle text-danger"></i></td>
+                            {% endif %}
+                            <td class="text-center">
+                                <a href="{% url 'user_modify' %}?uid={{ object.id }}"
+                                   class="btn btn-primary btn-sm">更新</a>
+                                {% if object.is_active %}
+                                    <a class="btn btn-warning btn-sm" onclick="user_stop({{ object.id }})">禁用</a>
+                                {% else %}
+                                    <a class="btn btn-success btn-sm" onclick="user_start({{ object.id }})">启用</a>
+                                {% endif %}
+                                <a class="btn btn-info btn-sm" href="{% url 'user_set_perm' %}?uid={{ object.id }}">设置权限</a>
+                                <a class="btn btn-danger btn-sm" onclick="user_delete({{ object.id }})">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <center>
+                    <div class="btn-group">
+                        {% if page_obj.has_previous %}
+                            <a href="{% url 'user_list' %}?page={{ page_obj.previous_page_number }}"
+                               class="btn btn-white">上一页</a>
+                        {% endif %}
+                        {% for page in page_range %}
+                            {% if page_obj.number == page %}
+                                <a class="btn btn-white active">{{ page }}</a>
+                            {% else %}
+                                <a class="btn btn-white" href="{% url 'user_list' %}?page={{ page }}">{{ page }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a href="{% url 'user_list' %}?page={{ page_obj.next_page_number }}" class="btn btn-white">下一页</a>
+                        {% endif %}
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block load_js %}
+    <script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>
+        function user_delete(user_id) {
+            var data = {};
+            data['user_id'] = user_id;
+            data['csrfmiddlewaretoken'] = "{{ csrf_token }}";
+            $.ajax({
+                url: '{% url 'user_delete' %}',
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    if (res.status == 0) {
+                        swal({
+                            title: res.msg,
+                            type: 'success',
+                            confirmButtonText: "OK"
+                        }, function () {
+                            window.location.reload()
+                        });
+                    } else {
+                        swal({
+                            title: res.msg,
+                            type: 'error',
+                            confirmButtonText: "知道了"
+                        });
+                    }
+                }
+            })
+        };
+
+        function user_stop(user_id) {
+            var data = {};
+            data['user_id'] = user_id;
+            data['csrfmiddlewaretoken'] = "{{ csrf_token }}";
+            $.ajax({
+                url: '{% url 'user_stop' %}',
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    if (res.status == 0) {
+                        swal({
+                            title: res.msg,
+                            type: 'success',
+                            confirmButtonText: "OK"
+                        }, function () {
+                            window.location.reload()
+                        });
+                    } else {
+                        swal({
+                            title: res.msg,
+                            type: 'error',
+                            confirmButtonText: "知道了"
+                        });
+                    }
+                }
+            })
+        };
+
+        function user_start(user_id) {
+            var data = {};
+            data['user_id'] = user_id;
+            data['csrfmiddlewaretoken'] = "{{ csrf_token }}";
+            $.ajax({
+                url: '{% url 'user_start' %}',
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    if (res.status == 0) {
+                        swal({
+                            title: res.msg,
+                            type: 'success',
+                            confirmButtonText: "OK"
+                        }, function () {
+                            window.location.reload()
+                        });
+                    } else {
+                        swal({
+                            title: res.msg,
+                            type: 'error',
+                            confirmButtonText: "知道了"
+                        });
+                    }
+                }
+            })
+        };
+    </script>
+{% endblock %}

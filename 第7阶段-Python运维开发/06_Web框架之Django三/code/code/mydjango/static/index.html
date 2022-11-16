@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+
+<title></title>
+
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+
+<script src="js/jquery.js"></script>
+
+<script src="js/popup.mini.js"></script>
+
+<script>
+
+$(function () {
+
+	var elm = $('#foot');
+
+	var startPos = 500;
+
+	$.event.add(window, "scroll", function () {
+
+		var p = $(window).scrollTop();
+
+		if (p > startPos) {
+
+			$("#w-scrol").show();
+
+		} else {
+
+			$("#w-scrol").hide();
+
+		}
+
+	});
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+		<section class="w-main">
+
+			<p class="w-main-p">中环网每120秒新增1个二手房客户，每11分钟新增1个租房客户</p>
+
+			<p>咨询热线: 400 9988 717</p>
+
+			<div class="w-nav">
+
+				<a class="w-buyhouse" href="javascript:;">我要买房</a>
+
+				<a class="w-sellhouse" href="javascript:;">我要卖房</a>
+
+				<a class="w-renthouse" href="javascript:;">我要出租</a>
+
+				<a class="w-renting" href="javascript:;">我要租房</a>
+
+			</div>
+
+		</section>
+
+		<!--买房弹出框-->
+
+		<div class="popup-buy">
+
+			<div class="popup-close"></div>
+
+			<div class="popup-title">
+
+				<span>我要买房</span>
+
+				<P>着急买房！网站能帮我快并且大范围的找到满意的房子吗？</P>
+
+			</div>
+
+			<ul class="popup-menu">
+
+				<li style="padding-top: 25px;">
+
+					<span>您的姓名:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<span><i>*</i>联系电话:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<span>我的房型:</span>
+
+					<select class="popup-select" style="margin-left: 15px;">
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+						<option>5室以上</option>
+
+					</select>
+
+					室
+
+					<select class="popup-select">
+
+						<option>0</option>
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+					</select>
+
+					厅
+
+					<select class="popup-select">
+
+						<option>0</option>
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+					</select>
+
+					卫
+
+				</li>
+
+				<li>
+
+					<span>装修程度:</span>
+
+					<select class="popup-zx">
+
+						<option>精装</option>
+
+						<option>简装</option>
+
+					</select>
+
+					
+
+				</li>
+
+				<li>
+
+					<span>售房面积:</span>
+
+	                <input type="text" class="popup-zx" />&nbsp;平方
+
+				</li>
+
+				<li>
+
+					<span>房屋价格:</span>
+
+	                <input type="text" class="popup-zx" />&nbsp;万
+
+				</li>
+
+				<li>
+
+					<span>详细地址:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<a href="" class="w-subbtn">提交</a>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<!--买房弹出框-->
+
+		<!--卖房弹出框-->
+
+		<div class="popup-sell">
+
+			<div class="popup-close"></div>
+
+			<div class="popup-title">
+
+				<span>我要卖房</span>
+
+				<P>着急买房！网站能帮我快并且大范围的找到满意的房子吗？</P>
+
+			</div>
+
+			<ul class="popup-menu">
+
+				<li style="padding-top: 25px;">
+
+					<span>您的姓名:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<span><i>*</i>联系电话:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<span>我的房型:</span>
+
+					<select class="popup-select" style="margin-left: 15px;">
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+						<option>5室以上</option>
+
+					</select>
+
+					室
+
+					<select class="popup-select">
+
+						<option>0</option>
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+					</select>
+
+					厅
+
+					<select class="popup-select">
+
+						<option>0</option>
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+					</select>
+
+					卫
+
+				</li>
+
+				<li>
+
+					<span>装修程度:</span>
+
+					<select class="popup-zx">
+
+						<option>精装</option>
+
+						<option>简装</option>
+
+					</select>
+
+					
+
+				</li>
+
+				<li>
+
+					<span>售房面积:</span>
+
+	                <input type="text" class="popup-zx" />&nbsp;平方
+
+				</li>
+
+				<li>
+
+					<span>房屋价格:</span>
+
+	                <input type="text" class="popup-zx" />&nbsp;万
+
+				</li>
+
+				<li>
+
+					<span>详细地址:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<a href="" class="w-subbtn">提交</a>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<!--卖房弹出框-->
+
+		<!--出租弹出框-->
+
+		<div class="popup-rent">
+
+			<div class="popup-close"></div>
+
+			<div class="popup-title">
+
+				<span>我要出租</span>
+
+				<P>我想尽快把房子出租给一个靠谱租户，还能获得合理的收益。</P>
+
+			</div>
+
+			<ul class="popup-menu">
+
+				<li style="padding-top: 25px;">
+
+					<span>您的姓名:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<span><i>*</i>联系电话:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				
+
+				<li>
+
+					<span>售房面积:</span>
+
+	                <input type="text" class="popup-zx" />&nbsp;平方
+
+				</li>
+
+				<li>
+
+					<span>意向租金:</span>
+
+	                <input type="text" class="popup-zx" />&nbsp;元/月
+
+				</li>
+
+				<li>
+
+					<span>求租方式:</span>
+
+					<label class="l-all"><input type="radio" name="RadioGroup1" value="整租" id="RadioGroup1_0">整租</label>
+
+					<label class="l-all"><input type="radio" name="RadioGroup1" value="合租" id="RadioGroup1_1">合租</label>
+
+				</li>
+
+				<li>
+
+					<span>其他配套:</span>
+
+					<fieldset class="w-else">
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check1">
+
+                    <label for="check1"></label><i>床</i>
+
+                </div>
+
+                <div class="w-checkbox">
+
+                    <input type="checkbox" id="check2">
+
+                    <label for="check2"></label><i>衣柜</i>
+
+                </div>    
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check3">
+
+                    <label for="check3"></label><i>书桌</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check4">
+
+                    <label for="check4"></label><i>热水器</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check5">
+
+                    <label for="check5"></label><i>暖气</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check6">
+
+                    <label for="check6"></label><i>宽带</i>
+
+                 </div>
+
+                  <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check7">
+
+                    <label for="check7"></label><i>燃气</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check8">
+
+                    <label for="check8"></label><i>微波炉</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check9">
+
+                    <label for="check9"></label><i>空调</i>
+
+                 </div>
+
+                  <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check10">
+
+                    <label for="check10"></label><i>冰箱</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check11">
+
+                    <label for="check11"></label><i>电视</i>
+
+                 </div>
+
+                 <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check12">
+
+                    <label for="check12"></label><i>洗衣机</i>
+
+                 </div>
+
+               <div class="clear"></div>
+
+              </fieldset>
+
+				</li>
+
+				<li>
+
+					<span>详细地址:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<a href="" class="w-subbtn">提交</a>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<!--出租弹出框-->
+
+		<!--租房弹出框-->
+
+		<div class="popup-renting">
+
+			<div class="popup-close"></div>
+
+			<div class="popup-title">
+
+				<span>我要租房</span>
+
+				<P>线上线下精准租金估价，准客定向推广及专业经济人推荐</P>
+
+			</div>
+
+			<ul class="popup-menu">
+
+				<li style="padding-top: 25px;">
+
+					<span>您的姓名:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<span><i>*</i>联系电话:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+			    <li>
+
+					<span>我的房型:</span>
+
+					<select class="popup-select" style="margin-left: 15px;">
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+						<option>5室以上</option>
+
+					</select>
+
+					室
+
+					<select class="popup-select">
+
+						<option>0</option>
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+					</select>
+
+					厅
+
+					<select class="popup-select">
+
+						<option>0</option>
+
+						<option>1</option>
+
+						<option>2</option>
+
+						<option>3</option>
+
+						<option>4</option>
+
+						<option>5</option>
+
+					</select>
+
+					卫
+
+				</li>
+
+				<li>
+
+					<span>预算价格:</span>
+
+	                <input type="text" class="popup-zx" />&nbsp;元
+
+				</li>
+
+				<li>
+
+					<span>求租方式:</span>
+
+					<label class="l-all"><input type="radio" name="RadioGroup1" value="整租" id="RadioGroup1_0">整租</label>
+
+					<label class="l-all"><input type="radio" name="RadioGroup1" value="合租" id="RadioGroup1_1">合租</label>
+
+				</li>
+
+				<li>
+
+					<span>其他配套:</span>
+
+					<fieldset class="w-else">
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check13">
+
+                    <label for="check13"></label><i>床</i>
+
+                </div>
+
+                <div class="w-checkbox">
+
+                    <input type="checkbox" id="check14">
+
+                    <label for="check14"></label><i>衣柜</i>
+
+                </div>    
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check15">
+
+                    <label for="check15"></label><i>书桌</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check16">
+
+                    <label for="check16"></label><i>热水器</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check17">
+
+                    <label for="check17"></label><i>暖气</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check18">
+
+                    <label for="check18"></label><i>宽带</i>
+
+                 </div>
+
+                  <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check19">
+
+                    <label for="check19"></label><i>燃气</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check20">
+
+                    <label for="check20"></label><i>微波炉</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check21">
+
+                    <label for="check21"></label><i>空调</i>
+
+                 </div>
+
+                  <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check22">
+
+                    <label for="check22"></label><i>冰箱</i>
+
+                </div>
+
+                <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check23">
+
+                    <label for="check23"></label><i>电视</i>
+
+                 </div>
+
+                 <div class="w-checkbox">    
+
+                    <input type="checkbox" id="check24">
+
+                    <label for="check24"></label><i>洗衣机</i>
+
+                 </div>
+
+               <div class="clear"></div>
+
+              </fieldset>
+
+				</li>
+
+				<li>
+
+					<span>详细地址:</span>
+
+					<input type="text" class="w-name" />
+
+				</li>
+
+				<li>
+
+					<a href="" class="w-subbtn">提交</a>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<!--租房弹出框-->
+
+		<section class="w-main1">
+
+			<ul class="w-menu">
+
+				<li class="buy"><a href="#w-main2"><span></span></a></li>
+
+				<li class="sell"><a href="#w-main3"><span></span></a></li>
+
+				<li class="rent"><a href="#w-main4"><span></span></a></li>
+
+				<li class="renting"><a href="#w-main5"><span></span></a></li>
+
+			</ul>
+
+		</section>
+
+		<section class="w-main2" id="w-main2">
+
+			<div class="wrap1004">
+
+				<img src="images/wide.png" class="w-wide-pic" />
+
+				<div class="w-wide-text">
+
+					<span class="title">我要买房</span>
+
+					<span class="advantage">着急买房！网站能帮我快并且大范围的找到满意的房子吗？</span>
+
+					<p>
+
+						着急买房！网站能帮我快并且大范围的找到满意的房子吗？<br />
+
+						匹配适合你的金融方案！
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</section>
+
+		<section class="w-main3" id="w-main3">
+
+			<div class="wrap1004">
+
+				<div class="w-wide-text">
+
+					<span class="title">着急卖房</span>
+
+					<span class="advantage">着急卖房！网站能帮我快并且大范围的推广我的房子吗？</span>
+
+					<p>
+
+						在线委托房源，<br />
+
+						即可获得中环网站定向推广特权服务！
+
+					</p>
+
+				</div>
+
+				<img src="images/sell.jpg" class="w-wide-pic" />
+
+			</div>
+
+		</section>
+
+		<section class="w-main4" id="w-main4">
+
+			<div class="wrap1004">
+
+				<img src="images/cz.png" class="w-wide-pic" />
+
+				<div class="w-wide-text">
+
+					<span class="title">我要出租</span>
+
+					<span class="advantage">我想尽快把房子出租给一个靠谱租户，还能获得合理收益。</span>
+
+					<p>
+
+						为你提供<br />
+
+						线上线下精准租金估价+准客定向推广服务+专业经济人推荐。
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</section>
+
+		<section class="w-main5" id="w-main5">
+
+			<div class="wrap1004">
+
+				<div class="w-wide-text">
+
+					<span class="title">我要租房</span>
+
+					<span class="advantage">我想尽快租一个合理的房子，价格优势，环境优美。</span>
+
+					<p>
+
+						为你提供<br />
+
+						线上线下精准租金估价+准客定向推广服务+专业经济人推荐。
+
+					</p>
+
+				</div>
+
+				<img src="images/rent.png" class="w-wide-pic" />
+
+			</div>
+
+		</section>
+
+		<footer class="foot" id="foot" >
+
+			<div id="w-scrol" style="display: none;">
+
+			<div class="f-title">中环网每120秒新增1个二手房客户，每11分钟新增1个租房客户</div>
+
+			<div class="w-nav" style=" width: 580px; margin-top: 20px;">
+
+				<a class="w-buyhouse" href="javascript:;">我要买房</a>
+
+				<a class="w-sellhouse" href="javascript:;">我要卖房</a>
+
+				<a class="w-renthouse" href="javascript:;">我要出租</a>
+
+				<a class="w-renting" href="javascript:;">我要租房</a>
+
+			</div>
+
+			<P>咨询热线: 400 9988 717</P>
+
+			</div>
+
+		</footer>
+
+	</body>
+
+<script type='text/javascript'>
+
+	(function(){
+
+		 new PopUp_api({el:'.w-buyhouse',html:'.popup-buy'});
+
+		 new PopUp_api({el:'.w-sellhouse',html:'.popup-sell'});
+
+		 new PopUp_api({el:'.w-renthouse',html:'.popup-rent'});
+
+		 new PopUp_api({el:'.w-renting',html:'.popup-renting'});
+
+	})()
+
+</script>
+
+</html>
+

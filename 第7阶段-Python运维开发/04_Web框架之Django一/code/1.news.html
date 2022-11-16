@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>运维自动化--新闻</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="blog.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="blog-masthead">
+        <div class="container">
+            <nav class="blog-nav">
+                <a class="blog-nav-item active" href="#">主页</a>
+                <a class="blog-nav-item" href="#">技术文章</a>
+                <a class="blog-nav-item" href="#">生活点滴</a>
+                <a class="blog-nav-item" href="#">我的过往</a>
+                <a class="blog-nav-item" href="#">闲情逸致</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="blog-header">
+            <h1 class="blog-title">运维自动化+运维云计算 DevOps</h1>
+            <p class="lead blog-description">记录运维工作的流程及其生活中的趣事</p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-8 blog-main">
+
+                <div class="blog-post">
+                    <h2 class="blog-post-title"></h2>
+                    <p class="blog-post-meta"><a href="#"></a></p>
+                    
+                </div><!-- /.blog-main -->
+            </div><!-- /.row -->
+
+        </div><!-- /.container -->
+
+        <footer class="blog-footer">
+            <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a
+                    href="https://twitter.com/mdo">@mdo</a>.</p>
+            <p>
+                <a href="#">Back to top</a>
+            </p>
+        </footer>
+
+
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+        </script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $.ajax({
+                type: "get",
+                url: "http://localhost:3000/news",
+                data: "",
+                dataType: "json",
+                success: function (res) {
+                    // console.log(res[0]);
+                    // 把数据写入到页面
+                    // 标题
+                    $('.blog-post-title').text(res[0].title);
+                    // 副标题
+                    $('.blog-post-meta').text(res[0].title2);
+                    // 内容
+                    $('.blog-post').append(res[0].content);
+                }
+            });
+        </script>
+</body>
+
+</html>

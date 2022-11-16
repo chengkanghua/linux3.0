@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+{{ content | default:'默认没有展示的，才展示的信息' }}
+<br/>
+{{ username | capfirst }}
+<br/>
+{% load my_tags %}
+{{ age | filter_minus:10 }}
+{#{% if age >= '18' %}#}
+{#    已经成年#}
+{#{% else %}#}
+{#    未成年#}
+{#{% endif %}#}
+{% load my_tags %}
+{{ age | filter_addstr:'by linux' }}
+{% load my_tags %}
+{% filter_mutiladd age 1 2 3 %}
+<br/>
+{{ job | cut:'x' }}
+<br/>
+爱好为:
+{% for one in hobby reversed %}
+    {% if forloop.first %}
+        <span style="color: coral">{{ forloop.counter }}#{{ one }}</span>
+    {% elif forloop.last %}
+        <span style="color:darkred">{{ forloop.counter }}#{{ one }}</span>
+    {% elif forloop.counter0 == 1 %}
+        <span style="color:yellow">{{ forloop.counter }}#{{ one }}</span>
+    {% else %}
+        <span>{{ forloop.counter }}#{{ one }}</span>
+    {% endif %}
+{% endfor %}
+<br/>
+{{ hobby }}
+<br/>
+{{ info.more }}
+<br/>
+{% for key,value in info.items %}
+    {% if key == 'less' %}
+        {{ value }}
+    {% endif %}
+{% endfor %}
+
+<hr/>
+{{ date | date:'Y-m-d H:i:s' }}
+<hr/>
+{#{{ mycalendar }}#}
+</body>
+</html>

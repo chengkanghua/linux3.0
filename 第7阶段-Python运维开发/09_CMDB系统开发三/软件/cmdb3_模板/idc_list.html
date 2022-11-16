@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block load_css %}
+    <link href="/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+{% endblock %}
+
+{% block mbx %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>机房展示</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{% url 'index' %}">首页</a>
+                </li>
+                <li>
+                    <a href="">资源管理</a>
+                </li>
+                <li>
+                    <a href="">机房展示</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>机房展示 </h5>
+            </div>
+            <div class="ibox-content">
+                <a class="btn btn-w-m btn-primary" href="{% url 'idc_create' %}">创建机房</a>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">机房简称</th>
+                        <th class="text-center">机房名称</th>
+                        <th class="text-center">机房地址</th>
+                        <th class="text-center">机房座机电话</th>
+                        <th class="text-center">机房负责人姓名</th>
+                        <th class="text-center">机房负责人邮箱</th>
+                        <th class="text-center">机房负责人手机号</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td class="text-center">{{ object.name }}</td>
+                            <td class="text-center">{{ object.name_cn }}</td>
+                            <td class="text-center">{{ object.address }}</td>
+                            <td class="text-center">{{ object.phone }}</td>
+                            <td class="text-center">{{ object.username }}</td>
+                            <td class="text-center">{{ object.username_email }}</td>
+                            <td class="text-center">{{ object.username_phone }}</td>
+                            <td class="text-center">
+                                <a href="{% url 'idc_modify' %}?id={{ object.id }}"
+                                   class="btn btn-primary btn-sm">更新</a>
+                                <a class="btn btn-danger btn-sm" onclick="idc_delete({{ object.id }})">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <center>
+                    <div class="btn-group">
+                        {% if page_obj.has_previous %}
+                            <a href="{% url 'idc_list' %}?page={{ page_obj.previous_page_number }}"
+                               class="btn btn-white">上一页</a>
+                        {% endif %}
+                        {% for page in page_range %}
+                            {% if page_obj.number == page %}
+                                <a class="btn btn-white active">{{ page }}</a>
+                            {% else %}
+                                <a class="btn btn-white" href="{% url 'idc_list' %}?page={{ page }}">{{ page }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a href="{% url 'idc_list' %}?page={{ page_obj.next_page_number }}" class="btn btn-white">下一页</a>
+                        {% endif %}
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block load_js %}
+    <script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>
+        function idc_delete(id) {
+            var data = {};
+            data['id'] = id;
+            data['csrfmiddlewaretoken'] = "{{ csrf_token }}";
+            $.ajax({
+                url: '{% url 'idc_delete' %}',
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    if (res.status == 0) {
+                        swal({
+                            title: res.msg,
+                            type: 'success',
+                            confirmButtonText: "OK"
+                        }, function () {
+                            window.location.reload()
+                        });
+                    } else {
+                        swal({
+                            title: res.msg,
+                            type: 'error',
+                            confirmButtonText: "知道了"
+                        });
+                    }
+                }
+            })
+        };
+    </script>
+{% endblock %}

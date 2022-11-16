@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery-3.4.1.js"></script>
+    <script>
+        // 遍历输出数据
+        var arr = ['linux','windows','macos'];
+        // js写法 for
+        for (var index = 0; index < arr.length; index++) {
+            console.log(arr[index]);
+        }
+        // jq遍历写法
+        $.each(arr,function (key,value) {
+            console.log(value)
+        })
+    </script>
+</body>
+</html>

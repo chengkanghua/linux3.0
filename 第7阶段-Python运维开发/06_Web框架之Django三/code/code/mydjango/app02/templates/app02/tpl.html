@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>{{ name | capfirst | cut:'s' | cut:'S' }}</p>
+{#<p>{{ age | add:1}}</p>#}
+{% load my_tags %}
+<p>{{ age | filter_add:5 }}</p>
+{% load my_tags %}
+<p>{%  filter_madd age 1 1 1 %}</p>
+{% if age >= 18 %}
+    <p>已经成年</p>
+{% else %}
+    <p>未成年</p>
+{% endif %}
+<p>{{ sex }}</p>
+<p>{{ info }}</p>
+<p>{{ hobby.0 }}、{{ hobby.1 }}、{{ hobby.2 }}</p>
+{#遍历列表#}
+{% for one in hobby %}
+    {% if forloop.first %}
+        <p style="color: red">{{ forloop.counter0 }}{{ one }}</p>
+    {% elif forloop.last %}
+        <p style="color: green">{{ forloop.counter0 }}{{ one }}</p>
+    {% else %}
+        <p>{{ forloop.counter0 }}{{ one }}</p>
+    {% endif %}
+{% endfor %}
+<p>{{ msg.str }}</p>
+{% for key,value in msg.items %}
+    <p>{{ forloop.counter }}{{ value | filter_mm:'' }}</p>
+{% endfor %}
+</body>
+</html>
