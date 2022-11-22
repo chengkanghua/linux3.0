@@ -38,7 +38,7 @@
     border-image-slice: 1;
     padding-left: 0px;
     width: 200px;
-        }
+	}
     .sidebar, body {
     background-color: #f8f8f8;
     }
@@ -65,17 +65,12 @@
       auto2top: true,
       loadNavbar: true, // load from _navbar.md 开启导航
       loadSidebar: true,//开启侧边栏
-      subMaxLevel: 2,   //设置侧片栏最大层级,最大6级
-      alias: {
-        '/.*/_sidebar.md': '/_sidebar.md'
-      },
-      sidebarDisplayLevel: 0,
-
+      subMaxLevel: 2, //设置侧片栏最大层级,最大6级
       //maxLevel: 4,
-      //search: 'auto',  //开启搜索
+      //search: 'auto', //开启搜索
       relativePath: true,// 启用相对路径
       mergeNavbar: true, //小屏幕设备合并导航栏到侧边栏
-      coverpage: true,   //开启首页封面
+      coverpage: true, //开启首页封面
       //onlyCover: true, //封面和内容单独显示
       routerMode: 'history',
       // 让你的内容页在滚动到指定的锚点时，距离页面顶部有一定空间。
@@ -92,7 +87,7 @@
       // 页脚
       footer: {
         copy: '<span>Copyright &copy; 2022 &nbsp  &nbsp</span>',
-        copy: '<span id="sitetime"></span> <br/> <span>Copyright &copy; 2022 &nbsp  &nbsp</span>',
+	copy: '<span id="sitetime"></span> <br/> <span>Copyright &copy; 2022 &nbsp  &nbsp</span>',
         auth: ' <strong><a href="https://github.com/chengkanghua" target="_blank">Mr.ckh</a></strong>',
         pre: '<hr/>',
         style: 'font-size: 18px; text-align: center;',
@@ -107,31 +102,31 @@
       scope: '.markdown-section',
       headings: 'h1, h2 ',
       title: 'TOC',
-        },
+  	},
     //sidebarDisplayLevel: 2, //侧边栏层级默认展开数量 0 不展开 1 展开二级目录
-    // 支持mermaid
-    plugins: [
-        function (hook, vm) {
-        hook.ready(function () {
-            mermaid.initialize({ startOnLoad: false });
-        });
-        hook.doneEach(function () {
-            mermaid.init(undefined, '.mermaid');
-        });
+   // 支持mermaid
+  plugins: [
+    function (hook, vm) {
+      hook.ready(function () {
+        mermaid.initialize({ startOnLoad: false });
+      });
+      hook.doneEach(function () {
+        mermaid.init(undefined, '.mermaid');
+      });
+    }
+  ],
+   markdown: {
+    renderer: {
+      code: function (code, lang) {
+        var html = '';
+        if (code.match(/^sequenceDiagram/) || code.match(/^graph/) || code.match(/^gantt/)) {
+          html = '<div class="mermaid">' + code + '</div>';
         }
-    ],
-    markdown: {
-        renderer: {
-        code: function (code, lang) {
-            var html = '';
-            if (code.match(/^sequenceDiagram/) || code.match(/^graph/) || code.match(/^gantt/)) {
-            html = '<div class="mermaid">' + code + '</div>';
-            }
-            var hl = Prism.highlight(code, Prism.languages[lang] || Prism.languages.markup);
-            return html + '<pre v-pre data-lang="' + lang + '"><code class="lang-' + lang + '">' + hl + '</code></pre>';
-        }
-        }
+        var hl = Prism.highlight(code, Prism.languages[lang] || Prism.languages.markup);
+        return html + '<pre v-pre data-lang="' + lang + '"><code class="lang-' + lang + '">' + hl + '</code></pre>';
       }
+    }
+  }
     }
   </script>
 
@@ -233,9 +228,9 @@
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs/components/matlab.min.js"></script>
 
-        <!--给侧边栏进行多级分类，并且自动折叠-->
+	<!--给侧边栏进行多级分类，并且自动折叠-->
   <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
-        <!--右边加一个目录跳转-->
+	<!--右边加一个目录跳转-->
   <script src="https://unpkg.com/docsify-toc@1.0.0/dist/toc.js"></script>
   <script type="text/javascript" src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
 
